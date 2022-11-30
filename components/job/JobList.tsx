@@ -1,15 +1,20 @@
-import { Stack } from "@chakra-ui/react"
+import { ChakraProps, SimpleGrid, Stack } from "@chakra-ui/react"
 import { observer } from "mobx-react-lite"
 import { useStore } from "store"
 import { JobCard } from "./JobCard"
+import { Job } from 'store/service/job';
 
-export const JobList = observer(() => {
-    const { jobManager } = useStore()
+
+interface Props extends ChakraProps{
+    jobs: Job[]
+}
+
+export const JobList = observer(({jobs, ...restProps}: Props) => {
     return (
-        <Stack direction={"row"} >
-            {jobManager.jobs.map(job => (
+        <SimpleGrid columns={[4,3,2]} {...restProps}>
+            {jobs.map(job => (
                 <JobCard key={job.id} job={job}></JobCard>
             ))}
-        </Stack>
+        </SimpleGrid>
     )
 })

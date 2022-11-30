@@ -1,16 +1,16 @@
 import { makeAutoObservable } from "mobx"
 import React from "react"
-import { ApplicationManager } from "./application"
-import { JobManager } from "./job"
-import { MessageManager } from "./message"
-import { SettingManager } from "./setting"
+import { IndexController } from "./controller"
+import { ApplicationController } from "./controller/application"
+import { ApplicationsController } from "./controller/applications"
+import { ProfileController } from "./controller/profile"
 
 
 class Store{
-    jobManager: JobManager = new JobManager()
-    applicationManager: ApplicationManager = new ApplicationManager()
-    messageManager: MessageManager = new MessageManager()
-    settingManager: SettingManager = new SettingManager()
+    indexController: IndexController = new IndexController()
+    profileController: ProfileController = new ProfileController()
+    applicationController: ApplicationController = new ApplicationController()
+    applicationsController: ApplicationsController = new ApplicationsController()
     constructor (arg?: Partial<Store>) {
         if (arg !== undefined && arg !== null) {
             Object.assign(this, arg)

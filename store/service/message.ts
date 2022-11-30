@@ -13,9 +13,9 @@ export class Message {
     }
 }
 
-export class MessageManager {
+export class MessageService {
     messages: Message[] = []
-    constructor (arg?: Partial<MessageManager>) {
+    constructor (arg?: Partial<MessageService>) {
         if (arg !== undefined && arg !== null) {
             Object.assign(this, arg)
         }

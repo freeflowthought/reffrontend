@@ -6,22 +6,20 @@ import { observer } from "mobx-react-lite";
 import { useDidMount } from "rooks";
 import { useStore } from "store";
 
-const Home = observer(() => {
-  const { indexController } = useStore();
+const Applications = observer(() => {
+  const { applicationsController } = useStore();
   useDidMount(() => {
-    console.log('-------------')
-    indexController.getJobs();
+    applicationsController.getApplications();
   });
 
   return (
     <Flex p="24px" align={"center"} flexDir="column">
-      <Search></Search>
-      <JobList alignSelf="flex-start" jobs={indexController.jobs}></JobList>
+
     </Flex>
   );
 });
 
 // @ts-ignore
-Home.Layout = Layout;
+Applications.Layout = Layout;
 
-export default Home;
+export default Applications;

@@ -3,25 +3,25 @@ import { JobList } from "components/job/JobList";
 import { Layout } from "components/layout";
 import { Search } from "components/search";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
 import { useDidMount } from "rooks";
 import { useStore } from "store";
 
-const Home = observer(() => {
-  const { indexController } = useStore();
+const Application = observer(() => {
+  const { applicationController } = useStore();
+  const { pathname } = useRouter()
   useDidMount(() => {
-    console.log('-------------')
-    indexController.getJobs();
+    applicationController.getApplicationById(Number(pathname));
   });
 
   return (
     <Flex p="24px" align={"center"} flexDir="column">
-      <Search></Search>
-      <JobList alignSelf="flex-start" jobs={indexController.jobs}></JobList>
+
     </Flex>
   );
 });
 
 // @ts-ignore
-Home.Layout = Layout;
+Application.Layout = Layout;
 
-export default Home;
+export default Application;

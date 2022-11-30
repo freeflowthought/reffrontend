@@ -1,14 +1,18 @@
 import { Button, Tag, Text, Stack } from "@chakra-ui/react";
 import { Card, CardHeader, CardFooter, CardBody } from "components/card";
-import { Job } from "store/job";
+import { Job } from "store/service/job";
+import { useRouter } from 'next/router';
 
 interface JobCardProps {
   job: Job;
 }
 
 export const JobCard = ({ job }: JobCardProps) => {
+  const router = useRouter()
   return (
-    <Card>
+    <Card onClick={() => {
+       router.push(`/job/${job.id}`)
+    }}>
       <CardHeader>{job.title}</CardHeader>
       <CardBody>
         <>
@@ -19,11 +23,22 @@ export const JobCard = ({ job }: JobCardProps) => {
               </Tag>
             ))}
           </Stack>
-          <Text mt="12px">{job.description}</Text>
+          <Text
+            mt="12px"
+            overflow="hidden"
+            webkit-box-orient="vertical"
+            webkit-line-clamp="2"
+            wordBreak={"break-word"}
+            opacity={0.6}
+          >
+            {job.description}
+          </Text>
+          <Text mt="12px">{job.location}</Text>
         </>
       </CardBody>
       <CardFooter>
         <Button
+          maxW={"50%"}
           flex={1}
           fontSize={"sm"}
           rounded={"full"}
@@ -31,9 +46,9 @@ export const JobCard = ({ job }: JobCardProps) => {
             bg: "gray.200",
           }}
         >
-          Message
+          Apply
         </Button>
-        <Button
+        {/* <Button
           flex={1}
           fontSize={"sm"}
           rounded={"full"}
@@ -50,7 +65,7 @@ export const JobCard = ({ job }: JobCardProps) => {
           }}
         >
           Follow
-        </Button>
+        </Button> */}
       </CardFooter>
     </Card>
   );

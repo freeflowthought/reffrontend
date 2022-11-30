@@ -19,10 +19,11 @@ export interface CardProps extends CenterProps {}
 
 export function Card({ children, ...restProps }: CardProps) {
   return (
-    <Center py={6} {...restProps}>
+    <Center p={6}  {...restProps}>
       <Box
         maxW={"270px"}
         w={"full"}
+        p={6}
         bg={useColorModeValue("white", "gray.800")}
         boxShadow={"2xl"}
         rounded={"md"}
@@ -36,8 +37,8 @@ export function Card({ children, ...restProps }: CardProps) {
 
 export interface CardFooterProps extends StackProps {}
 
-export const CardFooter = (props: CardFooterProps) => {
-  return <Stack mt={8} direction={"row"} spacing={4} />;
+export const CardFooter = ({children}: CardFooterProps) => {
+  return <Stack mt={8} alignItems="center" justifyContent={"center"} direction={"row"} spacing={4}>{children}</Stack>;
 };
 
 export interface CardBodyProps extends CenterProps {}

@@ -1,8 +1,8 @@
 
 import { makeAutoObservable } from 'mobx';
-export class SettingManager {
+export class SettingService {
     theme: "light" | "dark" = "light"
-    constructor (arg?: Partial<SettingManager>) {
+    constructor (arg?: Partial<SettingService>) {
         if (arg !== undefined && arg !== null) {
             Object.assign(this, arg)
         }
