@@ -29,6 +29,8 @@ export function Header() {
   return (
     <Box>
       <Flex
+        position={"sticky"}
+        top={0}
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
         minH={"60px"}

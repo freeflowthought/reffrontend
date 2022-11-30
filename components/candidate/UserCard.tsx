@@ -10,7 +10,7 @@ import {
   Button,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Card, CardBody, CardFooter, CardProps } from "./Card";
+import { Card, CardBody, CardFooter, CardProps } from "../card";
 
 export interface UserCardProps extends CardProps {
   avatar?: string;

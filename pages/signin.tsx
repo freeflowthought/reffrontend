@@ -1,66 +1,152 @@
+import React from "react";
+// Chakra imports
 import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    Checkbox,
-    Stack,
-    Link,
-    Button,
-    Heading,
-    Text,
-    useColorModeValue,
-  } from '@chakra-ui/react';
-  
-  export default function SignIn() {
-    return (
+  Box,
+  Flex,
+  Button,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Link,
+  Switch,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
+// Assets
+// import signInImage from "assets/img/signInImage.png";
+
+function SignIn() {
+  // Chakra color mode
+  const titleColor = useColorModeValue("teal.300", "teal.200");
+  const textColor = useColorModeValue("gray.400", "white");
+  return (
+    <Flex position="relative" mb="40px">
       <Flex
-        minH={'100vh'}
-        align={'center'}
-        justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-          <Stack align={'center'}>
-            <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-            <Text fontSize={'lg'} color={'gray.600'}>
-              to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
+        h={{ sm: "initial", md: "75vh", lg: "85vh" }}
+        w="100%"
+        maxW="1044px"
+        mx="auto"
+        justifyContent="space-between"
+        mb="30px"
+        pt={{ sm: "100px", md: "0px" }}
+      >
+        <Flex
+          alignItems="center"
+          justifyContent="start"
+          style={{ userSelect: "none" }}
+          w={{ base: "100%", md: "50%", lg: "42%" }}
+        >
+          <Flex
+            direction="column"
+            w="100%"
+            background="transparent"
+            p="48px"
+            mt={{ md: "150px", lg: "80px" }}
+          >
+            <Heading color={titleColor} fontSize="32px" mb="10px">
+              Welcome Back
+            </Heading>
+            <Text
+              mb="36px"
+              ms="4px"
+              color={textColor}
+              fontWeight="bold"
+              fontSize="14px"
+            >
+              Enter your email and password to sign in
             </Text>
-          </Stack>
+            <FormControl>
+              <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                Email
+              </FormLabel>
+              <Input
+                borderRadius="15px"
+                mb="24px"
+                fontSize="sm"
+                type="text"
+                placeholder="Your email adress"
+                size="lg"
+              />
+              <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                Password
+              </FormLabel>
+              <Input
+                borderRadius="15px"
+                mb="36px"
+                fontSize="sm"
+                type="password"
+                placeholder="Your password"
+                size="lg"
+              />
+              <FormControl display="flex" alignItems="center">
+                <Switch id="remember-login" colorScheme="teal" me="10px" />
+                <FormLabel
+                  htmlFor="remember-login"
+                  mb="0"
+                  ms="1"
+                  fontWeight="normal"
+                >
+                  Remember me
+                </FormLabel>
+              </FormControl>
+              <Button
+                fontSize="10px"
+                type="submit"
+                bg="teal.300"
+                w="100%"
+                h="45"
+                mb="20px"
+                color="white"
+                mt="20px"
+                _hover={{
+                  bg: "teal.200",
+                }}
+                _active={{
+                  bg: "teal.400",
+                }}
+              >
+                SIGN IN
+              </Button>
+            </FormControl>
+            <Flex
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              maxW="100%"
+              mt="0px"
+            >
+              <Text color={textColor} fontWeight="medium">
+                Don't have an account?
+                <Link color={titleColor} as="span" ms="5px" fontWeight="bold">
+                  Sign Up
+                </Link>
+              </Text>
+            </Flex>
+          </Flex>
+        </Flex>
+        <Box
+          display={{ base: "none", md: "block" }}
+          overflowX="hidden"
+          h="100%"
+          w="40vw"
+          position="absolute"
+          right="0px"
+        >
           <Box
-            rounded={'lg'}
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
-            p={8}>
-            <Stack spacing={4}>
-              <FormControl id="email">
-                <FormLabel>Email address</FormLabel>
-                <Input type="email" />
-              </FormControl>
-              <FormControl id="password">
-                <FormLabel>Password</FormLabel>
-                <Input type="password" />
-              </FormControl>
-              <Stack spacing={10}>
-                <Stack
-                  direction={{ base: 'column', sm: 'row' }}
-                  align={'start'}
-                  justify={'space-between'}>
-                  <Checkbox>Remember me</Checkbox>
-                  <Link color={'blue.400'}>Forgot password?</Link>
-                </Stack>
-                <Button
-                  bg={'blue.400'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }}>
-                  Sign in
-                </Button>
-              </Stack>
-            </Stack>
-          </Box>
-        </Stack>
+            //@ts-ignore
+            // bgImage={signInImage}
+            w="100%"
+            h="100%"
+            bgSize="cover"
+            bgPosition="50%"
+            position="absolute"
+            borderBottomLeftRadius="20px"
+          ></Box>
+        </Box>
       </Flex>
-    );
-  }
+    </Flex>
+  );
+}
+
+export default SignIn;

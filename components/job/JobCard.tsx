@@ -1,7 +1,6 @@
 import { Button, Tag, Text, Stack } from "@chakra-ui/react";
-import { Card, CardHeader } from "components/card/Card";
+import { Card, CardHeader, CardFooter, CardBody } from "components/card";
 import { Job } from "store/job";
-import { CardBody, CardFooter } from "../card/Card";
 
 interface JobCardProps {
   job: Job;

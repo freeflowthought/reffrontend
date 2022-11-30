@@ -4,6 +4,8 @@ import { StoreContext, store } from "../store/index";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import { Inspector, InspectParams } from "react-dev-inspector";
 import React from "react";
+import theme from 'lib/theme'
+
 const InspectorWrapper =
   process.env.NODE_ENV === "development" ? Inspector : React.Fragment;
 
@@ -16,7 +18,7 @@ function MyApp({ Component, pageProps }:AppProps) {
       disableLaunchEditor={false}
     >
       <StoreContext.Provider value={store}>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
