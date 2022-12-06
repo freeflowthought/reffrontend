@@ -8,18 +8,22 @@ import {
   FormLabel,
   Heading,
   Input,
-  Link,
   Switch,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-// Assets
+import { Link } from "components/link";
+import { useStore } from "store/index";
+import { observer } from "mobx-react-lite";
 // import signInImage from "assets/img/signInImage.png";
+import { useRouter } from 'next/router';
 
 function SignIn() {
   // Chakra color mode
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
+  const { userService } = useStore();
+  const router = useRouter()
   return (
     <Flex position="relative" mb="40px">
       <Flex
@@ -44,7 +48,7 @@ function SignIn() {
             p="48px"
             mt={{ md: "150px", lg: "80px" }}
           >
-            <Heading color={titleColor} fontSize="32px" mb="10px">
+            <Heading fontSize="32px" mb="10px">
               Welcome Back
             </Heading>
             <Text
@@ -93,17 +97,14 @@ function SignIn() {
               <Button
                 fontSize="10px"
                 type="submit"
-                bg="teal.300"
                 w="100%"
                 h="45"
                 mb="20px"
-                color="white"
                 mt="20px"
-                _hover={{
-                  bg: "teal.200",
-                }}
-                _active={{
-                  bg: "teal.400",
+                isLoading={userService.signin.loading}
+                onClick={async () => {
+                  await userService.signin.call()
+                  router.push('/')
                 }}
               >
                 SIGN IN
@@ -118,7 +119,13 @@ function SignIn() {
             >
               <Text color={textColor} fontWeight="medium">
                 Don't have an account?
-                <Link color={titleColor} as="span" ms="5px" fontWeight="bold">
+                <Link
+                  href="/signup"
+                  nativeProps={{
+                    ms: "5px",
+                    fontWeight: "bold",
+                  }}
+                >
                   Sign Up
                 </Link>
               </Text>
@@ -149,4 +156,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default observer(SignIn);

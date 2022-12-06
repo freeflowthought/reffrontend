@@ -1,24 +1,43 @@
-import { Button, Tag, Text, Stack } from "@chakra-ui/react";
-import { Card, CardHeader, CardFooter, CardBody } from "components/card";
+import {
+  Button,
+  Tag,
+  Text,
+  Stack,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Flex,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { Job } from "store/service/job";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
+import { useState } from "react";
 
-interface JobCardProps {
+export interface JobCardProps {
   job: Job;
+  onApply?: (id: number) => Promise<void>;
 }
 
-export const JobCard = ({ job }: JobCardProps) => {
-  const router = useRouter()
+export const JobCard = ({ job, onApply }: JobCardProps) => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   return (
-    <Card onClick={() => {
-       router.push(`/job/${job.id}`)
-    }}>
-      <CardHeader>{job.title}</CardHeader>
-      <CardBody>
+    <Card
+      _hover={{ boxShadow: "2xl" }}
+      variant={"outline"}
+      cursor="pointer"
+      onClick={() => {
+        router.push(`/job/${job.id}`);
+      }}
+    >
+      <CardHeader pb="0">{job.title}</CardHeader>
+      <CardBody pt={0}>
         <>
-          <Stack direction={"row"}>
+          <Text mt="12px">{job.salary}</Text>
+          <Stack mt="12px" direction={"row"}>
             {job.tags?.map((tag) => (
-              <Tag colorScheme={"teal"} size="md" key={tag}>
+              <Tag size="md" key={tag}>
                 {tag}
               </Tag>
             ))}
@@ -33,18 +52,43 @@ export const JobCard = ({ job }: JobCardProps) => {
           >
             {job.description}
           </Text>
-          <Text mt="12px">{job.location}</Text>
+          <Flex justifyContent={"space-between"}>
+            <Text mt="12px">{job.location}</Text>
+            <Text mt="12px">
+              <Tag>{job.type}</Tag>
+            </Text>
+          </Flex>
         </>
       </CardBody>
-      <CardFooter>
+      <CardFooter pt={0} justifyContent={"center"}>
         <Button
-          maxW={"50%"}
-          flex={1}
-          fontSize={"sm"}
-          rounded={"full"}
-          _focus={{
-            bg: "gray.200",
+          w={"full"}
+          mt={8}
+          // bg={'blue.400'}
+          // color={'white'}
+          // boxShadow={
+          //   '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+          // }
+          // _focus={{
+          //   bg: 'blue.500',
+          // }}
+          
+                      rounded={"md"}
+          isLoading={loading}
+          onClick={async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setLoading(true);
+            try {
+              await onApply?.(job.id as number);
+            } catch (error) {}
+            setLoading(false);
           }}
+          // _hover={{
+          //   transform: "translateY(-2px)",
+          //   boxShadow: "lg",
+          //   bg: 'blue.500',
+          // }}
         >
           Apply
         </Button>

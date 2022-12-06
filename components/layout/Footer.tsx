@@ -43,7 +43,7 @@ import {
       <Box
         bg={useColorModeValue('gray.50', 'gray.900')}
         color={useColorModeValue('gray.700', 'gray.200')}>
-        <Container as={Stack} maxW={'6xl'} py={10}>
+        {/* <Container as={Stack} maxW={'6xl'} py={10}>
           <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
             <Stack align={'flex-start'}>
               <ListHeader>Product</ListHeader>
@@ -87,7 +87,7 @@ import {
               <Link href={'#'}>LinkedIn</Link>
             </Stack>
           </SimpleGrid>
-        </Container>
+        </Container> */}
         <Box py={10}>
           <Flex
             align={'center'}
@@ -107,9 +107,9 @@ import {
             }}>
             <Logo />
           </Flex>
-          <Text pt={6} fontSize={'sm'} textAlign={'center'}>
+          {/* <Text pt={6} fontSize={'sm'} textAlign={'center'}>
             © 2022 Chakra Templates. All rights reserved
-          </Text>
+          </Text> */}
         </Box>
       </Box>
     );

@@ -7,13 +7,13 @@ import {
   Stack,
   Collapse,
   Icon,
-  Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  Portal,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -21,11 +21,13 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import NextLink from "next/link";
+
+import { useRouter } from "next/router";
+import { Link } from "components/link";
 
 export function Header() {
   const { isOpen, onToggle } = useDisclosure();
-
+  const router = useRouter();
   return (
     <Box>
       <Flex
@@ -60,6 +62,10 @@ export function Header() {
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
+            cursor="pointer"
+            onClick={() => {
+              router.push("/");
+            }}
           >
             Logo
           </Text>
@@ -75,25 +81,26 @@ export function Header() {
           direction={"row"}
           spacing={6}
         >
-          <NextLink href={"/signin"}>
+          <Link
+            href={"/signin"}
+            nativeProps={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <Button fontSize={"sm"} fontWeight={400} variant={"link"}>
               Sign In
             </Button>
-          </NextLink>
-          <NextLink href={"/signup"}>
+          </Link>
+          <Link href={"/signup"}>
             <Button
               display={{ base: "none", md: "inline-flex" }}
               fontSize={"sm"}
               fontWeight={600}
-              color={"white"}
-              bg={"pink.400"}
-              _hover={{
-                bg: "pink.300",
-              }}
             >
               Sign Up
             </Button>
-          </NextLink>
+          </Link>
         </Stack>
       </Flex>
 
@@ -115,36 +122,40 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? "#"}
-                fontSize={"sm"}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: "none",
-                  color: linkHoverColor,
-                }}
-              >
-                {navItem.label}
-              </Link>
+              <span>
+                <Link
+                  href={navItem.href ?? "#"}
+                  nativeProps={{
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "sm",
+                    p: 2,
+                    fontWeight: 500,
+                  }}
+                  variant={"default"}
+                >
+                  {navItem.label}
+                </Link>
+              </span>
             </PopoverTrigger>
 
             {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
+              <Portal>
+                <PopoverContent
+                  border={0}
+                  boxShadow={"xl"}
+                  bg={popoverContentBgColor}
+                  p={4}
+                  rounded={"xl"}
+                  minW={"sm"}
+                >
+                  <Stack bg="white">
+                    {navItem.children.map((child) => (
+                      <DesktopSubNav key={child.label} {...child} />
+                    ))}
+                  </Stack>
+                </PopoverContent>
+              </Portal>
             )}
           </Popover>
         </Box>
@@ -156,20 +167,18 @@ const DesktopNav = () => {
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
     <Link
-      href={href}
-      role={"group"}
-      display={"block"}
-      p={2}
-      rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      href={href || "#"}
+      variant={"default"}
+      nativeProps={{
+        display: "block",
+        p: 2,
+        rounded: "md",
+        _hover: { bg: "brand.50" },
+      }}
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
-          <Text
-            transition={"all .3s ease"}
-            _groupHover={{ color: "pink.400" }}
-            fontWeight={500}
-          >
+          <Text transition={"all .3s ease"} fontWeight={500}>
             {label}
           </Text>
           <Text fontSize={"sm"}>{subLabel}</Text>
@@ -247,7 +256,11 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         >
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link
+                key={child.label}
+                href={child.href || "#"}
+                nativeProps={{ py: 2 }}
+              >
                 {child.label}
               </Link>
             ))}

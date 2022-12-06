@@ -9,14 +9,13 @@ import { useStore } from "store";
 const Home = observer(() => {
   const { indexController } = useStore();
   useDidMount(() => {
-    console.log('-------------')
     indexController.getJobs();
   });
 
   return (
     <Flex p="24px" align={"center"} flexDir="column">
       <Search></Search>
-      <JobList alignSelf="flex-start" jobs={indexController.jobs}></JobList>
+      <JobList mt={6} alignSelf="flex-start" jobs={indexController.jobs} onApply={indexController.applyJob}></JobList>
     </Flex>
   );
 });

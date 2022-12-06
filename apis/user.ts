@@ -5,3 +5,11 @@ export const queryCurrentUser = async () => {
         email: 'asasas'
     }
 }
+
+export const signin = async () => {
+    return await 'ask;askaska[skas[aks'
+}
+
+export const signup = async () => {
+    return await 'ask;askaska[skas[aks'
+}

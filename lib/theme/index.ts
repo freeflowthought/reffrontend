@@ -1,4 +1,4 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
 import { globalStyles } from "./styles";
 import { font } from "./foundations/fonts";
 import { breakpoints } from "./foundations/breakpoints";
@@ -12,11 +12,14 @@ import { CardHeaderComponent } from "./additions/card/CardHeader";
 import { MainPanelComponent } from "./additions/layout/MainPanel";
 import { PanelContentComponent } from "./additions/layout/PanelContent";
 import { PanelContainerComponent } from "./additions/layout/PanelContainer";
+import { cardStyles } from "./components/card";
 // import { mode } from "@chakra-ui/theme-tools";
 export default extendTheme(
+  withDefaultColorScheme({ colorScheme: 'teal' }),
   { breakpoints }, // Breakpoints
   globalStyles,
   font, // Global styles
+  cardStyles,
   buttonStyles, // Button styles
   badgeStyles, // Badge styles
   linkStyles, // Link styles
