@@ -7,7 +7,6 @@ import CredentialsProvider from "next-auth/providers/credentials"
 
 export default NextAuth({
   callbacks: {
-    jwt() {},
   },
   // Configure one or more authentication providers
   providers: [

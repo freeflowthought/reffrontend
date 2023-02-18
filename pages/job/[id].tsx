@@ -9,7 +9,6 @@ import { CardHeader, CardBody } from "../../components/card/index";
 
 import {
   Box,
-  chakra,
   Container,
   Stack,
   Text,

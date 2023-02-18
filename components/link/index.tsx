@@ -1,4 +1,4 @@
-import { chakra, Link as ChakraLink, ChakraProps } from "@chakra-ui/react";
+import { Link as ChakraLink, ChakraProps } from "@chakra-ui/react";
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
 import { forwardRef, ForwardedRef } from "react";
 

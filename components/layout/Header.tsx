@@ -272,8 +272,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 
 interface NavItem {
   label: string;
-  subLabel?: string;
   children?: Array<NavItem>;
+  subLabel?: string;
   href?: string;
 }
 
@@ -283,22 +283,27 @@ const NAV_ITEMS: Array<NavItem> = [
     children: [
       {
         label: "My Profile",
-        subLabel: "Trending Design to inspire you",
+        subLabel: "explore my profile",
         href: "/profile",
+      },
+      {
+        label: "My job posts",
+        subLabel: "explore my job post",
+        href: "/post",
       },
     ],
   },
   {
-    label: "Find Work",
+    label: "Go to Market",
     children: [
       {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
+        label: "Explore Job Posts",
+        subLabel: "Find my dream job",
         href: "#",
       },
       {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
+        label: "Find Talents",
+        subLabel: "explore the user profile",
         href: "#",
       },
     ],
