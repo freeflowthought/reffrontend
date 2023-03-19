@@ -13,7 +13,9 @@ export class SignupController {
     },
   });
   signup = new AsyncState(async () => {
-    const values = this.form.getValues;
-    await this.userService.signup(values);
+    const { success, values } = this.form.validateFields()
+    if (success) {
+        await this.userService.signup(values);
+    }
   });
 }
