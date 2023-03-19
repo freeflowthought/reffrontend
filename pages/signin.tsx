@@ -22,7 +22,7 @@ function SignIn() {
   // Chakra color mode
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
-  const { userService } = useStore();
+  const { signinController } = useStore();
   const router = useRouter()
   return (
     <Flex position="relative" mb="40px">
@@ -101,9 +101,9 @@ function SignIn() {
                 h="45"
                 mb="20px"
                 mt="20px"
-                isLoading={userService.signin.loading}
+                isLoading={signinController.signin.loading}
                 onClick={async () => {
-                  await userService.signin.call()
+                  await signinController.signin.call()
                   router.push('/')
                 }}
               >

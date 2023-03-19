@@ -26,7 +26,7 @@ function SignUp() {
   const textColor = useColorModeValue("gray.700", "white");
   const bgColor = useColorModeValue("white", "gray.700");
   const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
-  const { userService } = useStore()
+  const { signupController } = useStore()
   const router = useRouter()
   return (
     <Flex
@@ -163,6 +163,7 @@ function SignUp() {
               Name
             </FormLabel>
             <Input
+
               fontSize="sm"
               ms="4px"
               borderRadius="15px"
@@ -175,6 +176,8 @@ function SignUp() {
               Email
             </FormLabel>
             <Input
+                          value={signupController.form.fields.email.value}
+                          onChange={signupController.form.fields.email.onChange}
               fontSize="sm"
               ms="4px"
               borderRadius="15px"
@@ -207,14 +210,17 @@ function SignUp() {
               fontWeight="bold"
               w="100%"
               h="45"
+              isLoading={signupController.signup.loading}
               mb="24px"
               onClick={async () => {
-                await userService.signup.call()
+                await signupController.signup.call()
+                
                 router.push('/')
               }}
             >
               SIGN UP
             </Button>
+            {signupController.signup.error && <Text>{signupController.signup.error}</Text>}
           </FormControl>
           <Flex
             flexDirection="column"

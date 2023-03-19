@@ -14,10 +14,10 @@ export class ValueState<T>{
 
 export class AsyncState<T> {
     loading = false
-    error: Error | null = null
+    error: string = ''
     data: T | null = null
-    _call: () => Promise<T>
-    constructor(func: () => Promise<T>, options?:  {
+    _call: (args?: any) => Promise<T>
+    constructor(func: (args?: any) => Promise<T>, options?:  {
         loading?: boolean,
     }) {
         this._call = func
@@ -27,13 +27,13 @@ export class AsyncState<T> {
 
         makeAutoObservable(this)
     }
-    async call() {
+    async call(args?: any) {
         this.setLoading(true)
         try {
-            const data = await this._call()
+            const data = await this._call(args)
             this.setData(data)
-        } catch (error) {
-            this.setError(error as Error)
+        } catch (error: any) {
+            this.setError(error.message || JSON.stringify(error))
         }
         this.setLoading(false)
         return [this.data, this.error]
@@ -41,7 +41,7 @@ export class AsyncState<T> {
     setLoading(loading: boolean) {
         this.loading = loading
     }
-    setError(error: Error | null) {
+    setError(error: string) {
         this.error = error
     }
     setData(data: T | null) {

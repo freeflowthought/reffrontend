@@ -6,6 +6,8 @@ import { ApplicationsController } from "./controller/applications"
 import { ProfileController } from "./controller/profile"
 import { JobController } from './controller/job';
 import { UserService } from './service/user';
+import { SignupController } from "./controller/signup"
+import { SigninController } from "./controller/signin"
 
 
 class Store{
@@ -14,6 +16,8 @@ class Store{
     jobController: JobController = new JobController()
     applicationController: ApplicationController = new ApplicationController()
     applicationsController: ApplicationsController = new ApplicationsController()
+    signupController = new SignupController()
+    signinController = new SigninController()
     userService = UserService.getInstance()
     constructor (arg?: Partial<Store>) {
         if (arg !== undefined && arg !== null) {

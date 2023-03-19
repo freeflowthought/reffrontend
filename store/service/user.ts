@@ -17,14 +17,14 @@ export class User {
 export class UserService {
     static _instance: UserService
     currentUser: User
-    signin = new AsyncState(async function () {
-        const token = await signin()
+    signin = async function (values: any) {
+        const token = await signin(values)
         window.localStorage.setItem('token', token)
-    })
-    signup = new AsyncState(async function () {
+    }
+    signup = async function (values: any) {
         const token = await signup()
         window.localStorage.setItem('token', token)
-    })
+    }
     static getInstance() {
         return UserService._instance || new UserService()
 
